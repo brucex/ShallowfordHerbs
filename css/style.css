@@ -1,0 +1,33 @@
+body {
+  padding-top: 60px;
+  font-family: 'Oxygen', sans-serif;
+  font-size: 19px;
+}
+.navbar-brand  {
+	white-space: normal;
+}
+@media (max-width: 980px) {
+  body {
+    padding-top: 60px;
+  }
+}
+
+/* Flexible iFrame */
+
+.Flexible-container {
+    position: relative;
+    padding-bottom: 56.25%;
+    padding-top: 30px;
+    height: 0;
+    overflow: hidden;
+}
+
+.Flexible-container iframe,   
+.Flexible-container object,  
+.Flexible-container embed {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
