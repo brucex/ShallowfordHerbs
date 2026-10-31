@@ -1,0 +1,39 @@
+{%- assign code = page.lang | default: "en" -%}
+{%- assign s = site.data.i18n[code] -%}
+{%- assign loc = site.data.langs.locales[code] -%}
+{%- assign origin = "https://www.shallowfordherbs.net" -%}
+{%- assign here = page.i18n_path | default: "" -%}
+{%- assign canonical = origin | append: loc.base | append: here -%}
+<!DOCTYPE html>
+<html lang="{{ loc.htmllang }}"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{ s[page.title_key] }}</title><meta name="description" content="{{ s[page.desc_key] }}">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT@0,9..144,300..600,0..100;1,9..144,300..600,0..100&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+{% if loc.fonts != blank %}<link href="{{ loc.fonts }}" rel="stylesheet">
+{% endif %}<link rel="stylesheet" href="/css/site.css"><link rel="stylesheet" href="/css/i18n.css">{% include hreflang.html %}
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+{% if page.page_key == "home" %}<link rel="preload" as="image" type="image/webp" imagesrcset="/img/mom-800w.webp 800w, /img/mom-1600w.webp 1600w" imagesizes="(max-width: 900px) calc(100vw - 40px), 560px" fetchpriority="high">
+{% endif %}{% if page.noindex %}<meta name="robots" content="noindex">
+{% endif %}<meta property="og:title" content="{{ s[page.title_key] | escape }}">
+<meta property="og:description" content="{{ s[page.desc_key] | escape }}">
+<meta property="og:type" content="website">
+<meta property="og:url" content="{{ canonical }}">
+<meta property="og:site_name" content="Shallowford Herbs &amp; Acupuncture Clinic">
+<meta property="og:locale" content="{{ loc.og_locale }}">
+<meta property="og:image" content="{{ origin }}/img/shop-1600w.jpg">
+<meta property="og:image:alt" content="{{ s["alt.storefront"] | escape }}">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"MedicalClinic","name":"Shallowford Herbs & Acupuncture Clinic","url":"https://www.shallowfordherbs.net/","telephone":"+1-770-455-8851","address":{"@type":"PostalAddress","streetAddress":"6021 New Peachtree Rd.","addressLocality":"Doraville","addressRegion":"GA","postalCode":"30340","addressCountry":"US"}}</script>
+</head>
+<body>
+{% include header.html current=page.current lang=code %}
+<main id="main" tabindex="-1">
+{% if page.page_key == "home" %}{% include pages/home.html %}
+{% elsif page.page_key == "about" %}{% include pages/about.html %}
+{% elsif page.page_key == "faq" %}{% include pages/faq.html %}
+{% elsif page.page_key == "visit" %}{% include pages/visit.html %}
+{% elsif page.page_key == "404" %}{% include pages/404.html %}
+{% endif %}
+</main>
+{% include footer.html lang=code %}
+</body></html>

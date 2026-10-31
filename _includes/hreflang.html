@@ -1,0 +1,11 @@
+{%- assign origin = "https://www.shallowfordherbs.net" -%}
+{%- assign here = page.i18n_path | default: "" -%}
+{%- assign code = page.lang | default: "en" -%}
+{%- assign loc = site.data.langs.locales[code] -%}
+{%- assign canonical = origin | append: loc.base | append: here -%}
+<link rel="canonical" href="{{ canonical }}">
+{%- for id in site.data.langs.order -%}
+  {%- assign L = site.data.langs.locales[id] -%}
+  <link rel="alternate" hreflang="{{ L.hreflang }}" href="{{ origin }}{{ L.base }}{{ here }}">
+{%- endfor -%}
+<link rel="alternate" hreflang="x-default" href="{{ origin }}/{{ here }}">
