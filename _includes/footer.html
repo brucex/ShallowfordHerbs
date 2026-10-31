@@ -1,0 +1,28 @@
+{%- assign lang = include.lang | default: "en" -%}
+{%- assign ui = site.data.ui[lang] -%}
+{%- if include.relative -%}
+  {%- assign home = "index.html" -%}
+  {%- assign asset = "" -%}
+{%- else -%}
+  {%- assign home = "/index.html" -%}
+  {%- assign asset = "/" -%}
+{%- endif -%}
+<footer class="site"><div class="wrap">
+  <div class="cols">
+    <div><a class="brand" href="{{ home }}"><span class="seal" aria-hidden="true">SH</span><span><span class="brand-name">{{ ui.brand_name | escape }}</span><span class="brand-sub">{{ ui.brand_sub | escape }}</span></span></a><p style="max-width:22em;margin:0">{{ ui.footer_blurb | escape }}</p></div>
+    <div><p class="label">{{ ui.visit_label | escape }}</p><p style="margin:0">{{ ui.footer_street | escape }}<br>{{ ui.footer_city | escape }}<br>{{ ui.marta_short | escape }}</p></div>
+    <div><p class="label">{{ ui.contact_label | escape }}</p><ul><li><a href="tel:{{ ui.phone_tel }}">{{ ui.phone_display | escape }}</a></li><li><a href="mailto:{{ ui.email }}">{{ ui.email | escape }}</a></li><li><a href="{{ ui.directions_url }}">{{ ui.directions | escape }} &rarr;</a></li></ul></div>
+    <div><p class="label">{{ ui.explore | escape }}</p><ul>
+      {%- for id in ui.footer_nav -%}
+        {%- for item in ui.nav -%}
+          {%- if item.id == id -%}
+            {%- if include.relative -%}{%- assign href = item.href | remove_first: "/" -%}{%- else -%}{%- assign href = item.href -%}{%- endif -%}
+            <li><a href="{{ href }}">{{ item.label | escape }}</a></li>
+          {%- endif -%}
+        {%- endfor -%}
+      {%- endfor -%}
+    </ul></div>
+  </div>
+  <div class="legal"><span>&copy; 2026 {{ ui.clinic_name | escape }}</span></div>
+</div></footer>
+<script src="{{ asset }}js/site.js"></script>

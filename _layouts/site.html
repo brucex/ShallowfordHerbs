@@ -1,0 +1,55 @@
+{%- assign ui = site.data.ui.en -%}
+{%- assign origin = ui.origin -%}
+{%- assign canonical = origin | append: page.url -%}
+{%- assign social = page.image | default: ui.default_image -%}
+{%- unless social contains "://" -%}
+  {%- assign social_first = social | slice: 0 -%}
+  {%- unless social_first == "/" -%}{%- assign social = "/" | append: social -%}{%- endunless -%}
+  {%- assign social = origin | append: social -%}
+{%- endunless -%}
+{%- assign social_alt = page.image_alt | default: ui.default_image_alt -%}
+{%- if page.collection == "posts" -%}
+  {%- capture page_title -%}{{ page.title | escape }} | {{ ui.clinic_name | escape }}{%- endcapture -%}
+  {%- assign og_type = "article" -%}
+{%- else -%}
+  {%- capture page_title -%}{{ page.title | escape }} | {{ ui.clinic_name | escape }}{%- endcapture -%}
+  {%- assign og_type = "website" -%}
+{%- endif -%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{ page_title }}</title>
+<meta name="description" content="{{ page.description | escape }}">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT@0,9..144,300..600,0..100;1,9..144,300..600,0..100&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/site.css">
+<link rel="canonical" href="{{ canonical }}">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="alternate" type="application/atom+xml" title="{{ ui.clinic_name | escape }}" href="{{ origin }}/feed.xml">
+<link rel="alternate" type="application/rss+xml" title="{{ ui.clinic_name | escape }}" href="{{ origin }}/rss.xml">
+<meta property="og:title" content="{{ page_title }}">
+<meta property="og:description" content="{{ page.description | escape }}">
+<meta property="og:type" content="{{ og_type }}">
+<meta property="og:url" content="{{ canonical }}">
+<meta property="og:site_name" content="{{ ui.clinic_name | escape }}">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="{{ social }}">
+<meta property="og:image:alt" content="{{ social_alt | escape }}">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{{ page_title }}">
+<meta name="twitter:description" content="{{ page.description | escape }}">
+<meta name="twitter:image" content="{{ social }}">
+<meta name="twitter:image:alt" content="{{ social_alt | escape }}">
+{% include jsonld.html %}
+</head>
+<body>
+{% include header.html current=page.current lang=page.lang %}
+<main id="main" tabindex="-1">
+{{ content }}
+</main>
+{% include footer.html lang=page.lang %}
+</body>
+</html>

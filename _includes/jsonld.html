@@ -1,0 +1,62 @@
+{%- assign ui = site.data.ui.en -%}
+{%- assign origin = ui.origin -%}
+{%- assign canonical = origin | append: page.url -%}
+{%- assign image_url = page.image -%}
+{%- if image_url -%}
+  {%- unless image_url contains "://" -%}
+    {%- assign image_first = image_url | slice: 0 -%}
+    {%- unless image_first == "/" -%}{%- assign image_url = "/" | append: image_url -%}{%- endunless -%}
+    {%- assign image_url = origin | append: image_url -%}
+  {%- endunless -%}
+{%- endif -%}
+{%- if page.collection == "posts" -%}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": {{ page.title | jsonify }},
+  "description": {{ page.description | jsonify }},
+  "url": {{ canonical | jsonify }},
+  "mainEntityOfPage": {{ canonical | jsonify }},
+  "inLanguage": "en",
+  "author": {
+    "@type": "Person",
+    "name": {{ ui.author_name | jsonify }}
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": {{ ui.clinic_name | jsonify }},
+    "url": {{ origin | append: "/" | jsonify }}
+  }{% if image_url %},
+  "image": {{ image_url | jsonify }}{% endif %}{% if page.tags %},
+  "keywords": {{ page.tags | join: ", " | jsonify }}{% endif %}
+}
+</script>
+{%- include faq-jsonld.html -%}
+{%- else -%}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Blog",
+  "name": {{ page.title | jsonify }},
+  "description": {{ page.description | jsonify }},
+  "url": {{ canonical | jsonify }},
+  "inLanguage": "en",
+  "author": {
+    "@type": "Person",
+    "name": {{ ui.author_name | jsonify }}
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": {{ ui.clinic_name | jsonify }},
+    "url": {{ origin | append: "/" | jsonify }}
+  }{% if site.posts.size > 0 %},
+  "blogPost": [
+    {%- for post in site.posts -%}
+    {"@type":"BlogPosting","headline":{{ post.title | jsonify }},"url":{{ origin | append: post.url | jsonify }}}{% unless forloop.last %},{% endunless %}
+    {%- endfor -%}
+  ]
+  {%- endif %}
+}
+</script>
+{%- endif -%}

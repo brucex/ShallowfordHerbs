@@ -1,0 +1,44 @@
+# GitHub Pages builds this site with its built-in Jekyll. Do not add a
+# GitHub Actions workflow, and do not add .nojekyll.
+theme: null
+future: false
+timezone: America/New_York
+url: "https://www.shallowfordherbs.net"
+baseurl: ""
+
+# Permalink style stays the default so existing pages keep /about.html URLs.
+# Posts override that below and publish at /blog/<slug> (no .html, no trailing slash).
+collections:
+  posts:
+    output: true
+    permalink: /blog/:slug
+
+defaults:
+  - scope:
+      path: ""
+      type: posts
+    values:
+      layout: post
+      current: blog
+      lang: en
+
+# These default GitHub Pages plugins fight a hand-built HTML site.
+optional_front_matter:
+  enabled: false
+titles_from_headings:
+  enabled: false
+
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor
+  - vendor/bundle/
+  - vendor/cache/
+  - vendor/gems/
+  - vendor/ruby/
+  - BLOG.md
+  - README.md
+  - CNAME
+  - script
+  - .bundle

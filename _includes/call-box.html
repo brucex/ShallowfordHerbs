@@ -1,0 +1,11 @@
+{%- assign lang = include.lang | default: page.lang | default: "en" -%}
+{%- assign ui = site.data.ui[lang] -%}
+<aside class="call-box" aria-label="{{ ui.call_box_label | escape }}">
+  <p class="eyebrow">{{ ui.visit_kicker | escape }}</p>
+  <h2 class="call-box-name">{{ ui.clinic_name | escape }}</h2>
+  <p class="call-box-addr">{{ ui.address_line | escape }}<br>{{ ui.marta | escape }}</p>
+  <div class="btn-row">
+    <a class="btn btn-primary" href="tel:{{ ui.phone_tel }}">{% include svg.html name="phone" %} {{ ui.phone_display | escape }}</a>
+    <a class="btn btn-ghost" href="{{ ui.directions_url }}">{% include svg.html name="pin" %} {{ ui.directions | escape }}</a>
+  </div>
+</aside>
