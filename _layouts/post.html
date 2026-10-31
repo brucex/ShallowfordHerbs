@@ -1,0 +1,36 @@
+---
+layout: site
+---
+<article class="post">
+  <header class="page-hero post-hero{% if page.image %} has-image{% endif %}">
+    <svg aria-hidden="true" class="leaf" style="width:380px;right:-90px;top:-80px;transform:rotate(30deg)" viewBox="0 0 200 200" fill="currentColor"><path d="M100 10c40 30 62 70 54 112-6 32-30 56-54 68-24-12-48-36-54-68C38 80 60 40 100 10z"/><path d="M100 30v160" stroke="#F6F4EE" stroke-width="3"/><path d="M100 80l-28-20M100 110l-34-22M100 140l-30-18M100 80l28-20M100 110l34-22M100 140l30-18" stroke="#F6F4EE" stroke-width="2.5" fill="none"/></svg>
+    <div class="wrap">
+      <div>
+        <div class="crumbs"><a href="/index.html">Home</a> / <a href="/blog/">Blog</a></div>
+        <span class="eyebrow">From the clinic</span>
+        <h1>{{ page.title | escape }}</h1>
+        {% if page.description %}<p class="lede">{{ page.description | escape }}</p>{% endif %}
+        {% if page.tags.size > 0 %}
+        <ul class="post-tags" aria-label="Topics">
+          {% for tag in page.tags %}<li>{{ tag | escape }}</li>{% endfor %}
+        </ul>
+        {% endif %}
+      </div>
+      {% if page.image %}
+      <figure class="post-figure">
+        <img src="{{ page.image }}" alt="{{ page.image_alt | default: page.title | escape }}" width="1600" height="1060">
+      </figure>
+      {% endif %}
+    </div>
+  </header>
+  <div class="post-body-wrap">
+    <div class="wrap">
+      <div class="post-column">
+        <div class="prose post-body">
+          {{ content }}
+        </div>
+        {% include call-box.html %}
+      </div>
+    </div>
+  </div>
+</article>

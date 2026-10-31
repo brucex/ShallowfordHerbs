@@ -1,0 +1,49 @@
+---
+layout: site
+title: Blog
+description: "Notes on acupuncture, Chinese herbal medicine, and what to expect at Shallowford Herbs & Acupuncture Clinic in Doraville, GA."
+current: blog
+lang: en
+---
+<section class="page-hero blog-hero">
+  <svg aria-hidden="true" class="leaf" style="width:380px;right:-90px;top:-80px;transform:rotate(30deg)" viewBox="0 0 200 200" fill="currentColor"><path d="M100 10c40 30 62 70 54 112-6 32-30 56-54 68-24-12-48-36-54-68C38 80 60 40 100 10z"/><path d="M100 30v160" stroke="#F6F4EE" stroke-width="3"/><path d="M100 80l-28-20M100 110l-34-22M100 140l-30-18M100 80l28-20M100 110l34-22M100 140l30-18" stroke="#F6F4EE" stroke-width="2.5" fill="none"/></svg>
+  <div class="wrap">
+    <div>
+      <div class="crumbs"><a href="/index.html">Home</a> / Blog</div>
+      <span class="eyebrow">From the clinic</span>
+      <h1>Blog</h1>
+      <p class="lede">Plain-language notes on acupuncture, Chinese herbal medicine, and visiting the clinic in Doraville.</p>
+    </div>
+  </div>
+</section>
+<section class="blog-index">
+  <div class="wrap">
+    {% if site.posts.size == 0 %}
+    <div class="empty-blog">
+      <h2>Articles are on the way</h2>
+      <p>We are writing the first pieces now. They will show up here when they are ready. If you have a question today, call the clinic and we will talk it through.</p>
+      <div class="btn-row">
+        <a class="btn btn-primary" href="tel:+17704558851">{% include svg.html name="phone" %} (770) 455-8851</a>
+        <a class="btn btn-ghost" href="/visit.html">Plan your visit</a>
+      </div>
+    </div>
+    {% else %}
+    <div class="blog-list">
+      {% for post in site.posts %}
+      <article class="blog-card{% unless post.image %} no-image{% endunless %}">
+        {% if post.image %}
+        <a class="blog-card-media" href="{{ post.url }}" tabindex="-1" aria-hidden="true">
+          <img src="{{ post.image }}" alt="" width="800" height="600" loading="lazy" decoding="async">
+        </a>
+        {% endif %}
+        <div class="body">
+          <h2><a href="{{ post.url }}">{{ post.title | escape }}</a></h2>
+          {% if post.description %}<p>{{ post.description | escape }}</p>{% endif %}
+          <a class="more" href="{{ post.url }}">Read article</a>
+        </div>
+      </article>
+      {% endfor %}
+    </div>
+    {% endif %}
+  </div>
+</section>

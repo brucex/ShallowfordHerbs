@@ -1,0 +1,61 @@
+# UI copy lives here so later /zh/, /ko/, and /es/ pages can reuse the includes.
+# Add a sibling of `en` and pass lang="zh" (etc.) into header.html and footer.html.
+# hrefs are root-absolute. English pages at the site root pass relative=true,
+# which turns "/about.html" back into "about.html". The blog is English-only
+# and always lives at /blog/ — do not nest it under /zh/ or /ko/.
+# If the open days change, also update the hour tables in index.html and visit.html.
+en:
+  origin: "https://www.shallowfordherbs.net"
+  hours: "Open Sat–Mon, Wed & Thu · Closed Tuesday & Friday"
+  skip: "Skip to content"
+  menu: "Menu"
+  close: "Close"
+  call: "Call (770) 455-8851"
+  call_aria: "Call the clinic"
+  directions: "Get directions"
+  explore: "Explore"
+  visit_label: "Visit"
+  contact_label: "Contact"
+  clinic_name: "Shallowford Herbs & Acupuncture Clinic"
+  author_name: "Dr. George Fan Xu, L.Ac., OMD"
+  brand_name: "Shallowford Herbs"
+  brand_sub: "& Acupuncture Clinic"
+  footer_blurb: "Traditional Chinese Medicine — acupuncture and Chinese herbal remedies from Dr. George Fan Xu, L.Ac., OMD."
+  address_line: "6021 New Peachtree Rd., Doraville, GA 30340"
+  footer_street: "6021 New Peachtree Rd."
+  footer_city: "Doraville, GA 30340"
+  marta: "Across from the Doraville MARTA Station"
+  marta_short: "Across from Doraville MARTA"
+  phone_display: "(770) 455-8851"
+  phone_tel: "+17704558851"
+  email: "georgefanxu@gmail.com"
+  directions_url: "https://www.google.com/maps/dir/?api=1&destination=6021+New+Peachtree+Rd+Doraville+GA+30340"
+  call_box_label: "Call and directions"
+  visit_kicker: "Visit the clinic"
+  default_image: "/img/shop-1600w.jpg"
+  default_image_alt: "Clinic storefront on New Peachtree Rd."
+  nav:
+    - id: home
+      label: "Home"
+      href: "/index.html"
+    - id: about
+      label: "About Dr. Xu"
+      href: "/about.html"
+    - id: treatments
+      label: "Treatments"
+      href: "/index.html#treatments"
+    - id: faq
+      label: "FAQ"
+      href: "/faq.html"
+    - id: blog
+      label: "Blog"
+      href: "/blog/"
+    - id: visit
+      label: "Visit & Contact"
+      href: "/visit.html"
+  footer_nav:
+    - about
+    - treatments
+    - faq
+    - blog
+    - visit

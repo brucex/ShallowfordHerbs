@@ -1,0 +1,81 @@
+{%- comment -%}
+  Auto-detect an FAQ block: an h2 whose text is "FAQ" / "FAQs" or contains
+  "frequently asked", followed by h3 questions until the next h2.
+  If that finds nothing, use an optional page.faq list of question/answer maps.
+{%- endcomment -%}
+{%- assign faq_json = "" -%}
+{%- assign faq_count = 0 -%}
+{%- capture nl %}
+{% endcapture -%}
+{%- if content -%}
+  {%- assign sections = content | split: "<h2" -%}
+  {%- for section in sections -%}
+    {%- assign is_faq = false -%}
+    {%- assign head_inner = section | split: "</h2>" | first -%}
+    {%- assign gt = head_inner | split: ">" -%}
+    {%- assign head_text = "" -%}
+    {%- if gt.size > 1 -%}
+      {%- for part in gt offset: 1 -%}
+        {%- assign head_text = head_text | append: part -%}
+        {%- unless forloop.last -%}{%- assign head_text = head_text | append: ">" -%}{%- endunless -%}
+      {%- endfor -%}
+      {%- assign head_text = head_text | strip_html | strip | downcase -%}
+    {%- endif -%}
+    {%- if head_text.size > 0 and head_text.size < 60 -%}
+      {%- assign three = head_text | slice: 0, 3 -%}
+      {%- assign four = head_text | slice: 0, 4 -%}
+      {%- if head_text == "faq" or head_text == "faqs" or head_text contains "frequently asked" or four == "faq " or four == "faqs" -%}
+        {%- assign is_faq = true -%}
+      {%- endif -%}
+      {%- if three == "faq" and head_text.size <= 4 -%}
+        {%- assign is_faq = true -%}
+      {%- endif -%}
+    {%- endif -%}
+    {%- if is_faq -%}
+      {%- assign body = section | split: "</h2>" | last -%}
+      {%- assign qparts = body | split: "<h3" -%}
+      {%- for qpart in qparts offset: 1 -%}
+        {%- assign pieces = qpart | split: "</h3>" -%}
+        {%- if pieces.size > 1 -%}
+          {%- assign q_head = pieces | first -%}
+          {%- assign q_body = pieces | last -%}
+          {%- assign qgt = q_head | split: ">" -%}
+          {%- assign qtext = "" -%}
+          {%- if qgt.size > 1 -%}
+            {%- for part in qgt offset: 1 -%}
+              {%- assign qtext = qtext | append: part -%}
+              {%- unless forloop.last -%}{%- assign qtext = qtext | append: ">" -%}{%- endunless -%}
+            {%- endfor -%}
+          {%- endif -%}
+          {%- assign qtext = qtext | strip_html | strip -%}
+          {%- assign atext = q_body | strip_html | strip | replace: nl, " " -%}
+          {%- assign atext = atext | replace: "&amp;", "&" | replace: "&nbsp;", " " | replace: "&#39;", "'" | replace: "&quot;", '"' -%}
+          {%- assign atext = atext | replace: "  ", " " | replace: "  ", " " | replace: "  ", " " | replace: "  ", " " | strip -%}
+          {%- if qtext != "" and atext != "" -%}
+            {%- capture entry -%}{"@type":"Question","name":{{ qtext | jsonify }},"acceptedAnswer":{"@type":"Answer","text":{{ atext | jsonify }}}}{%- endcapture -%}
+            {%- if faq_count > 0 -%}{%- assign faq_json = faq_json | append: "," -%}{%- endif -%}
+            {%- assign faq_json = faq_json | append: entry -%}
+            {%- assign faq_count = faq_count | plus: 1 -%}
+          {%- endif -%}
+        {%- endif -%}
+      {%- endfor -%}
+    {%- endif -%}
+  {%- endfor -%}
+{%- endif -%}
+{%- if faq_count == 0 and page.faq -%}
+  {%- for item in page.faq -%}
+    {%- assign qtext = item.question | default: item.q | strip -%}
+    {%- assign atext = item.answer | default: item.a | strip -%}
+    {%- if qtext != "" and atext != "" -%}
+      {%- capture entry -%}{"@type":"Question","name":{{ qtext | jsonify }},"acceptedAnswer":{"@type":"Answer","text":{{ atext | jsonify }}}}{%- endcapture -%}
+      {%- if faq_count > 0 -%}{%- assign faq_json = faq_json | append: "," -%}{%- endif -%}
+      {%- assign faq_json = faq_json | append: entry -%}
+      {%- assign faq_count = faq_count | plus: 1 -%}
+    {%- endif -%}
+  {%- endfor -%}
+{%- endif -%}
+{%- if faq_count > 0 -%}
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{{ faq_json }}]}
+</script>
+{%- endif -%}

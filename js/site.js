@@ -2,6 +2,8 @@
   var btn = document.querySelector(".menu-btn");
   var panel = document.getElementById("mobile-panel");
   var label = btn && btn.querySelector(".mb-label");
+  var menuLabel = (btn && btn.getAttribute("data-label-menu")) || "Menu";
+  var closeLabel = (btn && btn.getAttribute("data-label-close")) || "Close";
   var inertTargets = document.querySelectorAll(".skip, .utility, main, footer");
   var scrollY = 0;
 
@@ -37,7 +39,7 @@
     opts = opts || {};
     document.body.classList.toggle("nav-open", open);
     if (btn) btn.setAttribute("aria-expanded", open ? "true" : "false");
-    if (label) label.textContent = open ? "Close" : "Menu";
+    if (label) label.textContent = open ? closeLabel : menuLabel;
     lockScroll(open);
     setInert(open);
     if (open) {

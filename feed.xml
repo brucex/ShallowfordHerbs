@@ -1,0 +1,31 @@
+---
+layout: none
+---
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Shallowford Herbs &amp; Acupuncture Clinic</title>
+  <subtitle>Notes on acupuncture and Chinese herbal medicine from the Doraville clinic.</subtitle>
+  <link href="https://www.shallowfordherbs.net/feed.xml" rel="self" type="application/atom+xml"/>
+  <link href="https://www.shallowfordherbs.net/blog/" rel="alternate" type="text/html"/>
+  <id>https://www.shallowfordherbs.net/blog/</id>
+  <updated>{% if site.posts.size > 0 %}{{ site.posts.first.date | date_to_xmlschema }}{% else %}2026-10-31T00:00:00-04:00{% endif %}</updated>
+  <author>
+    <name>Dr. George Fan Xu, L.Ac., OMD</name>
+  </author>
+  {% for post in site.posts %}
+  <entry>
+    <title>{{ post.title | xml_escape }}</title>
+    <link href="{{ site.data.ui.en.origin }}{{ post.url }}" rel="alternate" type="text/html"/>
+    <id>{{ site.data.ui.en.origin }}{{ post.url }}</id>
+    <updated>{{ post.date | date_to_xmlschema }}</updated>
+    <published>{{ post.date | date_to_xmlschema }}</published>
+    <summary>{{ post.description | xml_escape }}</summary>
+    <author>
+      <name>Dr. George Fan Xu, L.Ac., OMD</name>
+    </author>
+    {% for tag in post.tags %}
+    <category term="{{ tag | xml_escape }}"/>
+    {% endfor %}
+  </entry>
+  {% endfor %}
+</feed>

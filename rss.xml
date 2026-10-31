@@ -1,0 +1,22 @@
+---
+layout: none
+---
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+  <channel>
+    <title>Shallowford Herbs &amp; Acupuncture Clinic</title>
+    <link>https://www.shallowfordherbs.net/blog/</link>
+    <description>Notes on acupuncture and Chinese herbal medicine from the Doraville clinic.</description>
+    <language>en-us</language>
+    <lastBuildDate>{% if site.posts.size > 0 %}{{ site.posts.first.date | date_to_rfc822 }}{% else %}Sat, 31 Oct 2026 00:00:00 -0400{% endif %}</lastBuildDate>
+    {% for post in site.posts %}
+    <item>
+      <title>{{ post.title | xml_escape }}</title>
+      <link>{{ site.data.ui.en.origin }}{{ post.url }}</link>
+      <guid>{{ site.data.ui.en.origin }}{{ post.url }}</guid>
+      <pubDate>{{ post.date | date_to_rfc822 }}</pubDate>
+      <description>{{ post.description | xml_escape }}</description>
+    </item>
+    {% endfor %}
+  </channel>
+</rss>
