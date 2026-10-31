@@ -1,0 +1,7 @@
+{%- assign u = include.url | default: "" -%}
+{%- if u contains "://" -%}
+{{- u -}}
+{%- elsif u != "" -%}
+{%- assign first = u | slice: 0 -%}
+{%- if first == "/" -%}{{- u -}}{%- else -%}/{{- u -}}{%- endif -%}
+{%- endif -%}

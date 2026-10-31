@@ -18,7 +18,7 @@ layout: site
       </div>
       {% if page.image %}
       <figure class="post-figure">
-        <img src="{{ page.image }}" alt="{{ page.image_alt | default: page.title | escape }}" width="1600" height="1060">
+        <img src="{% include root-url.html url=page.image %}" alt="{{ page.image_alt | default: page.title | escape }}" width="1600" height="1060">
       </figure>
       {% endif %}
     </div>

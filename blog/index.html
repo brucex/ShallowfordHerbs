@@ -33,7 +33,7 @@ lang: en
       <article class="blog-card{% unless post.image %} no-image{% endunless %}">
         {% if post.image %}
         <a class="blog-card-media" href="{{ post.url }}" tabindex="-1" aria-hidden="true">
-          <img src="{{ post.image }}" alt="" width="800" height="600" loading="lazy" decoding="async">
+          <img src="{% include root-url.html url=post.image %}" alt="" width="800" height="600" loading="lazy" decoding="async">
         </a>
         {% endif %}
         <div class="body">
