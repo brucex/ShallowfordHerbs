@@ -1,0 +1,61 @@
+{%- assign code = page.lang | default: "en" -%}
+{%- assign s = site.data.i18n[code] -%}
+{%- assign base = site.data.langs.locales[code].base -%}
+<section class="page-hero">
+  <svg aria-hidden="true" class="leaf" style="width:380px;right:-90px;top:-80px;transform:rotate(30deg)" viewBox="0 0 200 200" fill="currentColor"><path d="M100 10c40 30 62 70 54 112-6 32-30 56-54 68-24-12-48-36-54-68C38 80 60 40 100 10z"/><path d="M100 30v160" stroke="#F6F4EE" stroke-width="3"/><path d="M100 80l-28-20M100 110l-34-22M100 140l-30-18M100 80l28-20M100 110l34-22M100 140l30-18" stroke="#F6F4EE" stroke-width="2.5" fill="none"/></svg>
+  <div class="wrap">
+    <div>
+      <div class="crumbs"><a href="{{ base }}">{{ s["nav.home"] }}</a> / {{ s["nav.about"] }}</div>
+      <span class="eyebrow">{{ s["nav.about"] }}</span>
+      <h1>George Fan Xu<br><em style="font-style:italic;color:var(--cinnabar);font-weight:400">L.Ac., OMD</em></h1>
+      <p class="lede">{{ s["about.lede"] }}</p>
+    </div>
+    <picture><source type="image/webp" srcset="/img/profile-800w.webp 800w, img/profile-1600w.webp 1600w" sizes="(max-width: 900px) calc(100vw - 40px), 480px"><img src="/img/profile-800w.jpg" srcset="/img/profile-800w.jpg 800w, img/profile-1600w.jpg 1600w" sizes="(max-width: 900px) calc(100vw - 40px), 480px" alt="{{ s["about.alt.portrait"] }}" width="1600" height="1060" style="border-radius:200px 200px var(--radius) var(--radius);aspect-ratio:1/1;object-fit:cover;object-position:38% 40%" loading="eager" decoding="async" fetchpriority="high"></picture>
+  </div>
+</section>
+
+<section>
+  <div class="wrap two-col">
+    <div class="prose">
+      <span class="eyebrow">{{ s["about.words"] }}</span>
+      <p>{{ s["about.p1"] }}</p>
+      <p>{{ s["about.p2"] }}</p>
+      <p>{{ s["about.p3"] }}</p>
+      <p>{{ s["about.p4"] }}</p>
+    </div>
+    <aside class="sticky-card">
+      <picture><source type="image/webp" srcset="/img/mom-800w.webp 800w, img/mom-1600w.webp 1600w" sizes="(max-width: 900px) calc(100vw - 40px), 320px"><img src="/img/mom-800w.jpg" srcset="/img/mom-800w.jpg 800w, img/mom-1600w.jpg 1600w" sizes="(max-width: 900px) calc(100vw - 40px), 320px" alt="{{ s["about.alt.prep"] }}" width="1600" height="664" style="object-position:20% 50%" loading="lazy" decoding="async"></picture>
+      <dl>
+        <dt>{{ s["about.dt.edu"] }}</dt><dd>{{ s["about.dd.edu"] }}</dd>
+        <dt>{{ s["about.dt.cert"] }}</dt><dd>{{ s["about.dd.cert"] }}</dd>
+        <dt>{{ s["about.dt.spec"] }}</dt><dd>{{ s["about.dd.spec"] }}</dd>
+        <dt>{{ s["about.dt.dx"] }}</dt><dd>{{ s["about.dd.dx"] }}</dd>
+        
+      </dl>
+      <a class="btn btn-primary" style="width:100%;justify-content:center;margin-top:22px" href="tel:+17704558851"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.5c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg>{{ s["cta.call"] }}</a>
+    </aside>
+  </div>
+</section>
+
+<section class="alt" id="credentials">
+  <div class="wrap">
+    <div class="section-head">
+      <div><span class="eyebrow">{{ s["about.cred.eye"] }}</span><h2 style="margin:0">{{ s["about.cred.h2"] }}</h2></div>
+      <p>{{ s["about.cred.p"] }}</p>
+    </div>
+    <div class="certs">
+      <figure class="cert" style="margin:0"><picture><source type="image/webp" srcset="/img/cert2-800w.webp 800w, img/cert2-1600w.webp 1600w" sizes="(max-width: 900px) calc(100vw - 72px), 520px"><img src="/img/cert2-800w.jpg" srcset="/img/cert2-800w.jpg 800w, img/cert2-1600w.jpg 1600w" sizes="(max-width: 900px) calc(100vw - 72px), 520px" alt="{{ s["about.alt.herb"] }}" width="1600" height="1060" loading="lazy" decoding="async"></picture><figcaption><b>{{ s["about.cert.herb.b"] }}</b>{{ s["about.cert.org"] }}</figcaption></figure>
+      <figure class="cert" style="margin:0"><picture><source type="image/webp" srcset="/img/cert1-800w.webp 800w, img/cert1-1600w.webp 1600w" sizes="(max-width: 900px) calc(100vw - 72px), 520px"><img src="/img/cert1-800w.jpg" srcset="/img/cert1-800w.jpg 800w, img/cert1-1600w.jpg 1600w" sizes="(max-width: 900px) calc(100vw - 72px), 520px" alt="{{ s["about.alt.acu"] }}" width="1600" height="1060" loading="lazy" decoding="async"></picture><figcaption><b>{{ s["about.cert.acu.b"] }}</b>{{ s["about.cert.org"] }}</figcaption></figure>
+    </div>
+    <div class="facts">
+      <div class="fact"><h3>{{ s["about.fact.approach"] }}</h3><p>{{ s["about.fact.approach.p"] }}</p></div>
+      <div class="fact"><h3>{{ s["about.fact.follow"] }}</h3><p>{{ s["about.fact.follow.p"] }}</p></div>
+      
+    </div>
+  </div>
+</section>
+
+<div class="cta-band"><div class="wrap">
+  <div><h2>{{ s["about.cta.h2"] }}</h2><p>{{ s["about.cta.p"] }}</p></div>
+  <div class="btn-row"><a class="btn btn-light" href="tel:+17704558851"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.5c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg> (770) 455-8851</a><a class="btn btn-outline-light" href="{{ base }}visit.html">{{ s["hero.plan"] }}<svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+</div></div>

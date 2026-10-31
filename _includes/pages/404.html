@@ -1,0 +1,16 @@
+{%- assign code = page.lang | default: "en" -%}
+{%- assign s = site.data.i18n[code] -%}
+{%- assign base = site.data.langs.locales[code].base -%}
+<section class="page-hero">
+  <div class="wrap">
+    <div>
+      <span class="eyebrow">404</span>
+      <h1>{{ s["nf.h1"] }}</h1>
+      <p class="lede">{{ s["nf.lede"] }}</p>
+      <div class="btn-row">
+        <a class="btn btn-primary" href="{{ base }}">{{ s["nf.home"] }}</a>
+        <a class="btn btn-ghost" href="{{ base }}visit.html">{{ s["nav.visit"] }}</a>
+      </div>
+    </div>
+  </div>
+</section>

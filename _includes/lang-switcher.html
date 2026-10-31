@@ -1,0 +1,43 @@
+{%- assign code = include.lang | default: page.lang | default: "en" -%}
+{%- assign s = site.data.i18n[code] -%}
+{%- assign here = page.i18n_path | default: "" -%}
+{%- assign label_all = "" -%}
+{%- for id in site.data.langs.order -%}
+  {%- assign word = site.data.i18n[id]["ui.language"] -%}
+  {%- if label_all != "" -%}{%- assign label_all = label_all | append: " · " -%}{%- endif -%}
+  {%- assign label_all = label_all | append: word -%}
+{%- endfor -%}
+{%- assign cur = site.data.langs.locales[code] -%}
+{%- if include.kind == "button" -%}
+<div class="lang" data-lang-switcher>
+  <button type="button" class="lang-btn" aria-expanded="false" aria-controls="lang-menu" aria-label="{{ s["ui.changeLang"] }} ({{ label_all }}): {{ cur.name }}">{% include svg.html name="globe" %}<span class="lang-cur">{{ cur.short }}</span>{% include svg.html name="chev" %}</button>
+  <div class="lang-menu" id="lang-menu"><p class="lang-head" aria-hidden="true">{{ label_all }}</p><ul>
+    {%- for id in site.data.langs.order -%}
+      {%- assign L = site.data.langs.locales[id] -%}
+      {%- assign href = L.base | append: here -%}
+      <li><a href="{{ href }}" lang="{{ L.htmllang }}" hreflang="{{ L.hreflang }}" data-lang="{{ id }}"{% if id == code %} aria-current="true"{% endif %}>{% if id == code %}{% include svg.html name="check" %}{% endif %}<span class="ln">{{ L.name }}{% if L.sub %}<small lang="{{ L.htmllang }}">{{ L.sub }}</small>{% endif %}</span>{% if id == code %}<span class="sr">({{ s["ui.current"] }})</span>{% endif %}</a></li>
+    {%- endfor -%}
+  </ul></div>
+</div>
+{%- elsif include.kind == "fab" -%}
+<button type="button" class="lang-fab" aria-controls="mobile-panel" aria-label="{{ s["ui.changeLang"] }} ({{ label_all }})">{% include svg.html name="globe" %}</button>
+{%- elsif include.kind == "panel" -%}
+<div class="mp-lang" role="group" aria-label="{{ label_all }}">
+  <p class="mp-lang-label">{% include svg.html name="globe" %}<span>{{ label_all }}</span></p>
+  <div class="seg" style="--n:{{ site.data.langs.order.size }}">
+    {%- for id in site.data.langs.order -%}
+      {%- assign L = site.data.langs.locales[id] -%}
+      {%- assign href = L.base | append: here -%}
+      <a class="seg-item" href="{{ href }}" lang="{{ L.htmllang }}" hreflang="{{ L.hreflang }}" data-lang="{{ id }}"{% if id == code %} aria-current="true"{% endif %}>{% if id == code %}{% include svg.html name="check" %}{% endif %}<span class="ln">{{ L.name }}</span>{% if id == code %}<span class="sr">({{ s["ui.current"] }})</span>{% endif %}</a>
+    {%- endfor -%}
+  </div>
+</div>
+{%- elsif include.kind == "footer" -%}
+<span class="foot-langs">
+  {%- for id in site.data.langs.order -%}
+    {%- assign L = site.data.langs.locales[id] -%}
+    {%- assign href = L.base | append: here -%}
+    <a href="{{ href }}" lang="{{ L.htmllang }}" hreflang="{{ L.hreflang }}" data-lang="{{ id }}"{% if id == code %} aria-current="true"{% endif %}>{{ L.name }}</a>
+  {%- endfor -%}
+</span>
+{%- endif -%}

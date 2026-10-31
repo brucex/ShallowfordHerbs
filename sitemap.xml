@@ -19,6 +19,17 @@ layout: none
     <loc>https://www.shallowfordherbs.net/faq.html</loc>
     <lastmod>2026-10-29</lastmod>
   </url>
+  {% for id in site.data.langs.order %}
+  {% assign L = site.data.langs.locales[id] %}
+  {% if id != "en" %}
+  {% for item in site.data.langs.pages %}
+  <url>
+    <loc>https://www.shallowfordherbs.net{{ L.base }}{{ item.path }}</loc>
+    <lastmod>2026-10-31</lastmod>
+  </url>
+  {% endfor %}
+  {% endif %}
+  {% endfor %}
   <url>
     <loc>https://www.shallowfordherbs.net/blog/</loc>
     <lastmod>{% if site.posts.size > 0 %}{{ site.posts.first.date | date: "%Y-%m-%d" }}{% else %}2026-10-31{% endif %}</lastmod>

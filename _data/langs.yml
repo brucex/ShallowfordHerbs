@@ -1,0 +1,68 @@
+# One entry per language. Español later:
+# 1. Copy _data/i18n/en.json to _data/i18n/es.json and translate the values.
+# 2. Add `es` to `order` and a locales.es block (base /es/, htmllang es, hreflang es,
+#    name Español, short ES, no fonts — the Latin fonts already cover Spanish).
+# 3. Copy zh/*.html to es/*.html and set lang: es.
+# The switcher, hreflang tags, and sitemap pick the new language up from this file.
+order:
+  - en
+  - zh
+  - ko
+nav:
+  - id: home
+    key: nav.home
+    path: ""
+  - id: about
+    key: nav.about
+    path: about.html
+  - id: treatments
+    key: nav.treatments
+    path: "#treatments"
+  - id: faq
+    key: nav.faq
+    path: faq.html
+  - id: blog
+    key: nav.blog
+    path: /blog/
+    absolute: true
+  - id: visit
+    key: nav.visit
+    path: visit.html
+footer_nav:
+  - about
+  - treatments
+  - faq
+  - blog
+  - visit
+# Pages that exist in every language. Home uses an empty path.
+pages:
+  - path: ""
+  - path: about.html
+  - path: visit.html
+  - path: faq.html
+locales:
+  en:
+    base: "/"
+    htmllang: en
+    hreflang: en
+    name: English
+    short: EN
+    og_locale: en_US
+    fonts: ""
+  zh:
+    base: "/zh/"
+    htmllang: zh-Hans
+    hreflang: zh-Hans
+    name: "中文"
+    short: "中文"
+    sub: "简体"
+    og_locale: zh_CN
+    fonts: "https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;600;700&family=Noto+Serif+SC:wght@500;600&display=swap"
+  ko:
+    base: "/ko/"
+    htmllang: ko
+    hreflang: ko
+    name: "한국어"
+    short: "한국어"
+    og_locale: ko_KR
+    fonts: "https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;600;700&family=Noto+Serif+KR:wght@500;600&display=swap"

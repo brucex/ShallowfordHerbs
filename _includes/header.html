@@ -1,47 +1,45 @@
-{%- assign lang = include.lang | default: "en" -%}
-{%- assign ui = site.data.ui[lang] -%}
-{%- if include.relative -%}
-  {%- assign home = "index.html" -%}
-  {%- assign asset = "" -%}
-{%- else -%}
-  {%- assign home = "/index.html" -%}
-  {%- assign asset = "/" -%}
-{%- endif -%}
-<a class="skip" href="#main">{{ ui.skip | escape }}</a>
+{%- assign code = include.lang | default: page.lang | default: "en" -%}
+{%- assign s = site.data.i18n[code] -%}
+{%- assign loc = site.data.langs.locales[code] -%}
+{%- assign base = loc.base -%}
+<a class="skip" href="#main">{{ s["skip"] }}</a>
 <div class="utility"><div class="wrap">
-  <span>{% include svg.html name="pin" %} {{ ui.address_line | escape }} &middot; {{ ui.marta | escape }}</span>
-  <span>{% include svg.html name="clock" %} {{ ui.hours | escape }} &nbsp;&nbsp; <a href="tel:{{ ui.phone_tel }}">{{ ui.phone_display | escape }}</a></span>
+  <span>{% include svg.html name="pin" %} 6021 New Peachtree Rd., Doraville, GA 30340 &middot; {{ s["marta.long"] }}</span>
+  <span>{% include svg.html name="clock" %} {{ s["hours.summary"] }} &nbsp;&nbsp; <a href="tel:+17704558851">(770) 455-8851</a></span>
 </div></div>
 <header class="site"><div class="wrap">
-  <a class="brand" href="{{ home }}"><!-- Seal is a stand-in monogram until the clinic supplies a logo. --><span class="seal" aria-hidden="true">SH</span><span><span class="brand-name">{{ ui.brand_name | escape }}</span><span class="brand-sub">{{ ui.brand_sub | escape }}</span></span></a>
-  <nav class="main" aria-label="Main">
+  <a class="brand" href="{{ base }}"><!-- Seal is a stand-in monogram until the clinic supplies a logo. --><span class="seal" aria-hidden="true">SH</span><span><span class="brand-name">Shallowford Herbs</span><span class="brand-sub">{{ s["brand.sub"] }}</span></span></a>
+  <nav class="main" aria-label="{{ s["aria.main"] }}">
     <ul>
-      {%- for item in ui.nav -%}
-      {%- if include.relative -%}{%- assign href = item.href | remove_first: "/" -%}{%- else -%}{%- assign href = item.href -%}{%- endif -%}
-      <li><a href="{{ href }}"{% if include.current == item.id %} aria-current="page"{% endif %}>{{ item.label | escape }}</a></li>
+      {%- for item in site.data.langs.nav -%}
+      {%- if item.absolute -%}{%- assign href = item.path -%}{%- else -%}{%- assign href = base | append: item.path -%}{%- endif -%}
+      <li><a href="{{ href }}"{% if include.current == item.id %} aria-current="page"{% endif %}>{{ s[item.key] }}</a></li>
       {%- endfor -%}
     </ul>
-    <a class="btn btn-primary btn-call" href="tel:{{ ui.phone_tel }}">{% include svg.html name="phone" %} {{ ui.call | escape }}</a>
+    {% include lang-switcher.html kind="button" lang=code %}
+    <a class="btn btn-primary btn-call" href="tel:+17704558851">{% include svg.html name="phone" %} {{ s["cta.call"] | strip }}</a>
     <div class="head-actions">
-      <a class="call-fab" href="tel:{{ ui.phone_tel }}" aria-label="{{ ui.call_aria | escape }}">{% include svg.html name="phone" %}</a>
-      <button type="button" class="menu-btn" aria-expanded="false" aria-controls="mobile-panel" data-label-menu="{{ ui.menu | escape }}" data-label-close="{{ ui.close | escape }}"><i></i> <span class="mb-label">{{ ui.menu | escape }}</span></button>
+      {% include lang-switcher.html kind="fab" lang=code %}
+      <a class="call-fab" href="tel:+17704558851" aria-label="{{ s["aria.callClinic"] }}">{% include svg.html name="phone" %}</a>
+      <button type="button" class="menu-btn" aria-expanded="false" aria-controls="mobile-panel" data-label-open="{{ s["menu"] }}" data-label-close="{{ s["ui.close"] }}" data-label-menu="{{ s["menu"] }}"><i></i> <span class="mb-label">{{ s["menu"] }}</span></button>
     </div>
   </nav>
 </div>
 <div class="mobile-panel" id="mobile-panel">
-  <nav aria-label="Mobile">
+  {% include lang-switcher.html kind="panel" lang=code %}
+  <nav aria-label="{{ s["aria.mobile"] }}">
   <ul>
-    {%- for item in ui.nav -%}
-    {%- if include.relative -%}{%- assign href = item.href | remove_first: "/" -%}{%- else -%}{%- assign href = item.href -%}{%- endif -%}
-    <li><a href="{{ href }}"{% if include.current == item.id %} aria-current="page"{% endif %}>{{ item.label | escape }}<span aria-hidden="true">&rarr;</span></a></li>
+    {%- for item in site.data.langs.nav -%}
+    {%- if item.absolute -%}{%- assign href = item.path -%}{%- else -%}{%- assign href = base | append: item.path -%}{%- endif -%}
+    <li><a href="{{ href }}"{% if include.current == item.id %} aria-current="page"{% endif %}>{{ s[item.key] }}<span aria-hidden="true">&rarr;</span></a></li>
     {%- endfor -%}
   </ul>
   </nav>
   <div class="mp-info">
-    <b>{{ ui.address_line | escape }}</b><br>{{ ui.marta | escape }}<br>
-    {{ ui.hours | escape }}
-    <a class="btn btn-primary" href="tel:{{ ui.phone_tel }}">{% include svg.html name="phone" %} {{ ui.call | escape }}</a>
-    <a class="btn btn-ghost" href="{{ ui.directions_url }}">{% include svg.html name="pin" %} {{ ui.directions | escape }}</a>
+    <b>6021 New Peachtree Rd., Doraville, GA 30340</b><br>{{ s["marta.long"] }}<br>
+    {{ s["hours.summary"] }}
+    <a class="btn btn-primary" href="tel:+17704558851">{% include svg.html name="phone" %} {{ s["cta.call"] | strip }}</a>
+    <a class="btn btn-ghost" href="https://www.google.com/maps/dir/?api=1&destination=6021+New+Peachtree+Rd+Doraville+GA+30340">{% include svg.html name="pin" %} {{ s["directions"] | strip }}</a>
   </div>
 </div>
 </header>

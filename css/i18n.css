@@ -1,0 +1,101 @@
+/* ===== Multilingual additions (loaded after site.css) ===== */
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+/* --- Desktop: globe button + small menu --- */
+nav.main{gap:26px}
+.lang{position:relative}
+.lang-btn{display:inline-flex;align-items:center;gap:8px;height:44px;min-width:44px;padding:0 12px 0 13px;border:1.5px solid var(--sand);border-radius:999px;background:transparent;color:var(--ink);font:600 15px/1 var(--sans);cursor:pointer;white-space:nowrap}
+.lang-btn:hover,.lang-btn[aria-expanded="true"]{border-color:var(--ink)}
+.lang-btn .globe{width:18px;height:18px;color:var(--moss);flex:none}
+.lang-btn .chev{width:14px;height:14px;color:var(--taupe);transition:transform .15s}
+.lang-btn[aria-expanded="true"] .chev{transform:rotate(180deg)}
+.lang-menu{display:none;position:absolute;right:0;top:calc(100% + 10px);width:236px;background:#fff;border:1px solid #e9e6dc;border-radius:14px;padding:8px;box-shadow:0 24px 50px -20px rgba(38,46,34,.4);z-index:40}
+.lang.open .lang-menu{display:block}
+.lang-menu::before{content:"";position:absolute;top:-6px;right:28px;width:10px;height:10px;background:#fff;border-left:1px solid #e9e6dc;border-top:1px solid #e9e6dc;transform:rotate(45deg)}
+.lang-head{font:600 11.5px/1.3 var(--sans);letter-spacing:.08em;color:var(--taupe);margin:6px 10px 8px}
+.lang-menu ul{list-style:none;margin:0;padding:0}
+.lang-menu a{display:flex;align-items:center;gap:10px;min-height:48px;padding:0 12px 0 40px;border-radius:10px;color:var(--ink);text-decoration:none;font:500 17px/1.2 var(--sans);position:relative}
+.lang-menu a:hover{background:var(--paper)}
+.lang-menu a small{font-size:12.5px;color:var(--taupe);margin-left:8px;font-weight:400}
+.lang-menu a[aria-current]{background:var(--cinnabar-tint);color:var(--cinnabar);font-weight:700;box-shadow:inset 3px 0 0 var(--cinnabar)}
+.lang-menu a[aria-current] small{color:var(--cinnabar)}
+.lang-menu .check{position:absolute;left:13px;top:50%;width:18px;height:18px;margin-top:-9px}
+
+/* --- Mobile: globe in header + language choices at top of the menu --- */
+.lang-fab{display:none;width:44px;height:44px;border-radius:50%;border:1.5px solid var(--ink);background:none;color:var(--ink);place-items:center;padding:0;cursor:pointer}
+.lang-fab .globe{width:21px;height:21px}
+.mp-lang{padding:6px 0 18px;border-bottom:1px solid var(--sand)}
+.mp-lang-label{display:flex;align-items:center;gap:8px;font:600 13px/1.3 var(--sans);letter-spacing:.06em;color:var(--moss);margin:0 0 10px}
+.mp-lang-label .globe{width:16px;height:16px}
+.seg{display:grid;grid-template-columns:repeat(var(--n),minmax(0,1fr));gap:6px;background:var(--stone);border-radius:14px;padding:5px}
+.seg-item{display:flex;align-items:center;justify-content:center;gap:6px;min-height:50px;border-radius:10px;color:var(--ink);text-decoration:none;font:600 16.5px/1.1 var(--sans);text-align:center;padding:0 6px}
+.seg-item small{display:none}
+.seg-item[aria-current]{background:#fff;color:var(--cinnabar);font-weight:700;box-shadow:0 1px 0 rgba(0,0,0,.04),0 0 0 1.5px var(--cinnabar)}
+.seg-item .check{width:16px;height:16px;flex:none}
+@media (max-width:900px){
+  nav.main .lang{display:none}
+  .lang-fab{display:inline-grid}
+  .head-actions{gap:8px}
+  .mobile-panel li a{padding:17px 0;font-size:26px}
+}
+@media (max-width:420px){
+  .seal{width:36px;height:36px;font-size:15px}
+  .brand{gap:9px}
+  .brand-name{font-size:17px}
+  .brand-sub{font-size:8.5px;letter-spacing:.12em}
+  .head-actions{gap:6px}
+}
+/* With 4+ languages the mobile row becomes a 2×2 grid (Spanish later) */
+@media (max-width:420px){ .seg[style*="--n:4"]{grid-template-columns:1fr 1fr} }
+
+/* Footer language links */
+.foot-langs{display:flex;gap:18px}
+.foot-langs a{color:#C9CEBD;text-decoration:none;display:inline-flex;align-items:center;min-height:44px;margin:-12px 0}
+.foot-langs a[aria-current]{color:#fff;font-weight:700;text-decoration:underline;text-underline-offset:4px}
+
+/* ===== CJK typography ===== */
+html:lang(zh-Hans){--serif:"Fraunces","Noto Serif SC","Noto Serif CJK SC",serif;--sans:"Source Sans 3","Noto Sans SC","Noto Sans CJK SC",sans-serif}
+html:lang(ko){--serif:"Fraunces","Noto Serif KR","Noto Serif CJK KR",serif;--sans:"Source Sans 3","Noto Sans KR","Noto Sans CJK KR",sans-serif}
+html:lang(zh-Hans) body,html:lang(ko) body{line-height:1.85}
+html:lang(ko) body{word-break:keep-all;overflow-wrap:anywhere}
+html:lang(zh-Hans) body{line-break:strict}
+:lang(zh-Hans) :is(h1,h2,h3,h4),:lang(ko) :is(h1,h2,h3,h4){letter-spacing:0;line-height:1.32;font-weight:600}
+:lang(zh-Hans) h1,:lang(ko) h1{font-size:clamp(36px,4.3vw,58px);line-height:1.3}
+:lang(zh-Hans) h2,:lang(ko) h2{font-size:clamp(28px,3.1vw,40px)}
+:lang(zh-Hans) h3,:lang(ko) h3{font-size:22px}
+/* never italic for CJK: emphasis by colour + weight */
+:lang(zh-Hans) :is(em,i,cite,.aside-quote,blockquote),:lang(ko) :is(em,i,cite,.aside-quote,blockquote){font-style:normal}
+:lang(zh-Hans) .hero h1 em,:lang(ko) .hero h1 em{display:block;font-weight:600}
+:lang(zh-Hans) .lede,:lang(ko) .lede{line-height:1.85}
+/* tracking: wide caps tracking looks broken on Han/Hangul */
+:lang(zh-Hans) :is(.eyebrow,.kicker,.brand-sub,.ethic cite,footer.site .label,.mp-lang-label),
+:lang(ko) :is(.eyebrow,.kicker,.brand-sub,.ethic cite,footer.site .label,.mp-lang-label){letter-spacing:.06em}
+:lang(zh-Hans) .eyebrow,:lang(ko) .eyebrow{font-size:14px}
+:lang(zh-Hans) .brand-sub,:lang(ko) .brand-sub{font-size:12.5px;letter-spacing:.14em;margin-top:5px}
+:lang(zh-Hans) .infostrip .kicker,:lang(ko) .infostrip .kicker{font-size:13.5px}
+:lang(zh-Hans) .trust div,:lang(ko) .trust div{line-height:1.5}
+:lang(zh-Hans) .steps p,:lang(ko) .steps p{line-height:1.8}
+:lang(zh-Hans) .ethic blockquote,:lang(ko) .ethic blockquote{line-height:1.5;font-size:clamp(26px,2.6vw,34px)}
+:lang(zh-Hans) .timeline li,:lang(ko) .timeline li{line-height:1.55}
+:lang(zh-Hans) .chips li,:lang(ko) .chips li{line-height:1.5}
+@media (max-width:900px){
+  :lang(zh-Hans) h1,:lang(ko) h1{font-size:34px}
+  :lang(zh-Hans) h2,:lang(ko) h2{font-size:27px}
+  :lang(zh-Hans) .brand-sub,:lang(ko) .brand-sub{font-size:11px}
+  :lang(zh-Hans) .trust div,:lang(ko) .trust div{font-size:13px}
+}
+
+nav.main a{white-space:nowrap}
+:lang(ko) nav.main ul{gap:24px}
+/* the switcher lives inside nav.main: undo the nav's horizontal list styles */
+nav.main .lang-menu ul{display:block}
+nav.main .lang-menu ul a{display:flex;padding:0 12px 0 40px;border-bottom:0;font-size:17px;font-weight:500}
+nav.main .lang-menu ul a::after{content:none}
+nav.main .lang-menu ul a[aria-current]{font-weight:700;color:var(--cinnabar)}
+
+/* The globe switcher plus six nav labels is wider than the old header.
+   Below 1360px the phone stays as the round button so nothing overflows. */
+@media (max-width: 1360px) and (min-width: 901px){
+  nav.main .btn-call{display:none}
+  .call-fab{display:inline-grid !important}
+}

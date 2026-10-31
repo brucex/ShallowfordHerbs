@@ -1,28 +1,24 @@
-{%- assign lang = include.lang | default: "en" -%}
-{%- assign ui = site.data.ui[lang] -%}
-{%- if include.relative -%}
-  {%- assign home = "index.html" -%}
-  {%- assign asset = "" -%}
-{%- else -%}
-  {%- assign home = "/index.html" -%}
-  {%- assign asset = "/" -%}
-{%- endif -%}
+{%- assign code = include.lang | default: page.lang | default: "en" -%}
+{%- assign s = site.data.i18n[code] -%}
+{%- assign loc = site.data.langs.locales[code] -%}
+{%- assign base = loc.base -%}
 <footer class="site"><div class="wrap">
   <div class="cols">
-    <div><a class="brand" href="{{ home }}"><span class="seal" aria-hidden="true">SH</span><span><span class="brand-name">{{ ui.brand_name | escape }}</span><span class="brand-sub">{{ ui.brand_sub | escape }}</span></span></a><p style="max-width:22em;margin:0">{{ ui.footer_blurb | escape }}</p></div>
-    <div><p class="label">{{ ui.visit_label | escape }}</p><p style="margin:0">{{ ui.footer_street | escape }}<br>{{ ui.footer_city | escape }}<br>{{ ui.marta_short | escape }}</p></div>
-    <div><p class="label">{{ ui.contact_label | escape }}</p><ul><li><a href="tel:{{ ui.phone_tel }}">{{ ui.phone_display | escape }}</a></li><li><a href="mailto:{{ ui.email }}">{{ ui.email | escape }}</a></li><li><a href="{{ ui.directions_url }}">{{ ui.directions | escape }} &rarr;</a></li></ul></div>
-    <div><p class="label">{{ ui.explore | escape }}</p><ul>
-      {%- for id in ui.footer_nav -%}
-        {%- for item in ui.nav -%}
+    <div><a class="brand" href="{{ base }}"><span class="seal" aria-hidden="true">SH</span><span><span class="brand-name">Shallowford Herbs</span><span class="brand-sub">{{ s["brand.sub"] }}</span></span></a><p style="max-width:22em;margin:0">{{ s["footer.desc"] }}</p></div>
+    <div><p class="label">{{ s["footer.visit"] }}</p><p style="margin:0">6021 New Peachtree Rd.<br>Doraville, GA 30340<br>{{ s["marta.short"] }}</p></div>
+    <div><p class="label">{{ s["footer.contact"] }}</p><ul><li><a href="tel:+17704558851">(770) 455-8851</a></li><li><a href="mailto:georgefanxu@gmail.com">georgefanxu@gmail.com</a></li><li><a href="https://www.google.com/maps/dir/?api=1&destination=6021+New+Peachtree+Rd+Doraville+GA+30340">{{ s["footer.directions"] }}</a></li></ul></div>
+    <div><p class="label">{{ s["footer.explore"] }}</p><ul>
+      {%- for id in site.data.langs.footer_nav -%}
+        {%- for item in site.data.langs.nav -%}
           {%- if item.id == id -%}
-            {%- if include.relative -%}{%- assign href = item.href | remove_first: "/" -%}{%- else -%}{%- assign href = item.href -%}{%- endif -%}
-            <li><a href="{{ href }}">{{ item.label | escape }}</a></li>
+            {%- if item.absolute -%}{%- assign href = item.path -%}{%- else -%}{%- assign href = base | append: item.path -%}{%- endif -%}
+            <li><a href="{{ href }}">{{ s[item.key] }}</a></li>
           {%- endif -%}
         {%- endfor -%}
       {%- endfor -%}
     </ul></div>
   </div>
-  <div class="legal"><span>&copy; 2026 {{ ui.clinic_name | escape }}</span></div>
+  <div class="legal"><span>{{ s["legal"] }}</span>{% include lang-switcher.html kind="footer" lang=code %}</div>
 </div></footer>
-<script src="{{ asset }}js/site.js"></script>
+<script src="/js/site.js"></script>
+<script src="/js/i18n.js"></script>
