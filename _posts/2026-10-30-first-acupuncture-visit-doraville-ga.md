@@ -10,7 +10,7 @@ tags:
   - doraville
   - chamblee
   - atlanta
-published: false
+published: true
 ---
 
 If you've never tried acupuncture, it's normal to feel a little unsure before your first appointment. Will it hurt? What will the doctor ask? What's this about herbal tea? We hear these questions every week at our clinic on New Peachtree Road, across from the Doraville MARTA station.
@@ -102,7 +102,6 @@ We're open 10:00 AM to 6:30 PM on Monday, Wednesday, Thursday, Saturday and Sund
 If you've been living with allergies, sinus trouble, a nagging cough, joint pain or another problem that just won't settle, we'd be glad to meet you and talk it through.
 
 **Call Shallowford Herbs & Acupuncture Clinic at [(770) 455-8851](tel:+17704558851)** to book your first visit, or see [directions and hours](/visit.html).
-6021 New Peachtree Rd., Doraville, GA 30340 (across from Doraville MARTA)
 
 ---
 
