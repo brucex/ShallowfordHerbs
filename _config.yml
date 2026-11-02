@@ -6,6 +6,9 @@ timezone: America/New_York
 url: "https://www.shallowfordherbs.net"
 baseurl: ""
 
+# Public GA4 measurement ID. The head include renders gtag.js only when this is set.
+google_analytics: G-3SJ5WD5NSR
+
 # Permalink style stays the default so existing pages keep /about.html URLs.
 # Posts override that below and publish at /blog/<slug> (no .html, no trailing slash).
 collections:
