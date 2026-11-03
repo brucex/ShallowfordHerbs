@@ -7,5 +7,51 @@
   gtag('js', new Date());
 
   gtag('config', '{{ site.google_analytics }}');
+
+  document.addEventListener('click', function (event) {
+    var node = event.target;
+    if (node && node.nodeType === 3) node = node.parentElement;
+    var link = node && node.closest ? node.closest('a[href^="tel:"]') : null;
+    if (!link || typeof gtag !== 'function') return;
+
+    var text = (link.textContent || '').replace(/\s+/g, ' ').trim();
+    if (!text) text = (link.getAttribute('aria-label') || '').trim();
+
+    gtag('event', 'phone_call_click', {
+      link_url: link.getAttribute('href'),
+      link_text: text,
+      link_location: phoneLinkLocation(link),
+      page_path: location.pathname,
+      transport_type: 'beacon'
+    });
+  });
+
+  function phoneLinkLocation(link) {
+    var node = link;
+    var hint = '';
+    while (node && node !== document.body) {
+      var explicit = node.getAttribute('data-call-location');
+      if (explicit && explicit.trim()) return explicit.trim();
+      var tag = node.tagName.toLowerCase();
+      var cls = (node.getAttribute('class') || '').trim().split(/\s+/)[0];
+      if (!hint && node !== link && cls && cls !== 'wrap' && cls !== 'btn-row') hint = cls;
+      if (tag === 'footer') return 'footer';
+      if (tag === 'nav') return node.classList.contains('main') ? 'header-nav' : (cls || 'nav');
+      if (node.classList.contains('utility')) return 'utility';
+      if (node.classList.contains('mobile-panel')) return 'mobile-nav';
+      if (node.classList.contains('cta-band')) return 'cta';
+      if (node.classList.contains('infostrip')) return 'infostrip';
+      if (node.classList.contains('call-box')) return 'call-box';
+      if (tag === 'header') return node.classList.contains('site') ? 'header' : (cls || 'header');
+      if (tag === 'aside') return cls || 'aside';
+      if (tag === 'section' || tag === 'article') {
+        if (node.id) return node.id;
+        return cls || hint || tag;
+      }
+      if (tag === 'main') return hint || 'main';
+      node = node.parentElement;
+    }
+    return hint || 'page';
+  }
 </script>
 {%- endif -%}
