@@ -11,6 +11,8 @@ tags:
   - chamblee
   - atlanta
 published: true
+image: /img/first-acupuncture-visit-doraville-ga-800w.jpg
+image_alt: "A patient talking with a therapist holding a clipboard in a bright consultation room"
 ---
 
 If you've never tried acupuncture, it's normal to feel a little unsure before your first appointment. Will it hurt? What will the doctor ask? What's this about herbal tea? We hear these questions every week at our clinic on New Peachtree Road, across from the Doraville MARTA station.
