@@ -157,6 +157,8 @@ footer.site ul{list-style:none;margin:0;padding:0;line-height:2}
 footer.site .brand{color:#fff;margin-bottom:18px}
 footer.site .brand-sub{color:#A9B494}
 footer.site .legal{margin-top:52px;padding-top:24px;border-top:1px solid rgba(255,255,255,.1);display:flex;justify-content:space-between;font-size:13.5px;color:#8F9585;gap:20px}
+footer.site .credit{margin:20px 0 0;font-size:13.5px;line-height:1.5;color:#8F9585}
+footer.site .credit a{color:#C9CEBD;text-decoration:underline;text-underline-offset:2px;overflow-wrap:normal}
 
 /* Inner page hero */
 .page-hero{padding:64px 0 72px;background:var(--stone);position:relative;overflow:hidden}
