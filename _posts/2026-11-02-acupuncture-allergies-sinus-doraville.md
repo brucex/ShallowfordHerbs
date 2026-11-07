@@ -12,8 +12,8 @@ tags:
   - chamblee
   - atlanta
 published: true
-image: /img/herbs-800w.jpg
-image_alt: "Dried Chinese herbs measured out for an herbal tea prescription at Shallowford Herbs & Acupuncture Clinic"
+image: /img/acupuncture-allergies-sinus-doraville-800w.jpg
+image_alt: "A plate of dried Chinese herbal ingredients beside a dark teapot and cup"
 ---
 
 Allergies and sinus trouble are what our clinic is best known for. For decades, people from Doraville, Chamblee, Brookhaven and all over Atlanta have come to see Dr. George Fan Xu, L.Ac., OMD, because their noses won't stop running, their heads feel full, or a sinus problem keeps coming back no matter what they try.
